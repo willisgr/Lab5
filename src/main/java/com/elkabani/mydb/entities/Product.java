@@ -1,15 +1,17 @@
 package com.elkabani.mydb.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "products", schema = "mymarket")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +27,9 @@ public class Product {
     @Column(name = "price", nullable = false, precision = 10)
     private BigDecimal price;
 
+    @ManyToOne
+    @ToString.Exclude
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }
